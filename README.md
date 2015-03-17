@@ -15,4 +15,4 @@ To use:
 * Paste the webhook Url in to the slackUrl field
 * click Submit to save
 
-![alt tag](https://raw.github.com/jregovic/cwslack-zenoss/ZenossSlack.png)
+![alt tag](https://raw.githubusercontent.com/jregovic/slack-zenoss/master/ZenossSlack.png)
