@@ -1,0 +1,3 @@
+[zenoss.zenpacks]
+ZenPacks.community.Slack = ZenPacks.community.Slack
+
