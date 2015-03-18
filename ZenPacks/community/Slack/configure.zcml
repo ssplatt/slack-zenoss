@@ -5,7 +5,6 @@
 
 
     <!-- Includes: Browser Configuration -->
-    <include package=".browser"/>
 
     <utility
             factory=".actions.slack.SlackAction"

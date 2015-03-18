@@ -4,6 +4,9 @@
 #!/usr/bin/env python
 import json
 import httplib2
+import socks
+from urlparse import urlparse
+
 def sendSlack(slackUrl='http://www.slack.com',proxyUrl=None,proxyUsername=None,proxyPassword=None,**data):
     evt=data['evt']
     device=evt.device
@@ -18,7 +21,7 @@ def sendSlack(slackUrl='http://www.slack.com',proxyUrl=None,proxyUsername=None,p
     close_url = data['urls']['closeUrl']
     dev_events_url = data['urls']['eventsUrl']
     reopen_url = data['urls']['reopenUrl']
-    
+    devUrl=data['urls']['deviceUrl'] 
 
     # setup the output
     # set the color based on severity
@@ -40,7 +43,7 @@ def sendSlack(slackUrl='http://www.slack.com',proxyUrl=None,proxyUsername=None,p
     if cleared_by is None:
         fields = [{
             "title": "Actions",
-            "value": "<" + ack_url + "|Acknowledge>\n<" + close_url + "|Close>\n<" + dev_events_url + "|View Device Events>",
+            "value": "<"+detail_url+"|Event Details>\n<" + ack_url + "|Acknowledge>\n<" + close_url + "|Close>\n<" + dev_events_url + "|View Device Events>",
             "short": False
         }]
     else:
@@ -56,8 +59,8 @@ def sendSlack(slackUrl='http://www.slack.com',proxyUrl=None,proxyUsername=None,p
         
     attachment = [{
         "fallback": summary,
-        "text": message,
-        "title": device + ": " + summary,
+        "text": summary,
+        "title": "<"+devUrl+"|"+device+">",
         "title_link": detail_url,
         "color": color,
         "fields": fields
@@ -69,7 +72,13 @@ def sendSlack(slackUrl='http://www.slack.com',proxyUrl=None,proxyUsername=None,p
 	"username":"zenossbot",
         "attachments": attachment
     })
-    
-    h = httplib2.Http()
+   
+    if proxyUrl:
+	parsedUrl=urlparse(proxyUrl)
+	proxyHost=parsedUrl.hostname
+	proxyPort=parsedUrl.port
+	h = httplib2.Http(proxy_info = httplib2.ProxyInfo(socks.PROXY_TYPE_HTTP, proxyHost, proxyPort)) 
+    else:
+    	h = httplib2.Http()
     (resp, content) = h.request(slackUrl, "POST", body=payload, headers={'content-type':'application/json'} )
     
