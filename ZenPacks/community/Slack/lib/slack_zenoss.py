@@ -4,7 +4,7 @@
 #!/usr/bin/env python
 import json
 import httplib2
-import socks
+
 from urlparse import urlparse
 
 def sendSlack(slackUrl='http://www.slack.com',proxyUrl=None,proxyUsername=None,proxyPassword=None,**data):
@@ -77,8 +77,8 @@ def sendSlack(slackUrl='http://www.slack.com',proxyUrl=None,proxyUsername=None,p
 	parsedUrl=urlparse(proxyUrl)
 	proxyHost=parsedUrl.hostname
 	proxyPort=parsedUrl.port
-	h = httplib2.Http(proxy_info = httplib2.ProxyInfo(socks.PROXY_TYPE_HTTP, proxyHost, proxyPort)) 
+	h = httplib2.Http(disable_ssl_certificate_validation=True,proxy_info = httplib2.ProxyInfo(httplib2.socks.PROXY_TYPE_HTTP, proxyHost, proxyPort)) 
     else:
-    	h = httplib2.Http()
+    	h = httplib2.Http(disable_ssl_certificate_validation=True)
     (resp, content) = h.request(slackUrl, "POST", body=payload, headers={'content-type':'application/json'} )
     
