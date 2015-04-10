@@ -2,7 +2,7 @@
 A Slack notification using an incoming webhook to show events from Zenoss.
 
 To use:
-* Install teh ZenPack using  zenpack--install=PATH_TO_EGG
+* Install the ZenPack using  zenpack--install=PATH_TO_EGG
 * In Slack, create a new Incoming WebHook
 * Set the channel to post to, i.e. #alerts
 * Set the name of the bot, i.e. Zenoss-bot
