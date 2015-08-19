@@ -28,7 +28,7 @@ def usage():
     --severity=          event severity: severity=${evt/severity}\n\
     --message=           event message: message=${evt/message}\n\
     --summary=           event summary: summary= {evt/summary}\n\
-    --clear_id=          event cleared by: cleared_by=${evt/clearid}\n\
+    --cleared_by=          event cleared by: cleared_by=${evt/clearid}\n\
     --detail_url=        link to event details: detail_url=${urls/eventUrl}\n\
     --ack_url=           link to acknowledge event: ack_url=${urls/ackUrl}\n\
     --close_url=         link to close event: close_url=${urls/closeUrl}\n\
