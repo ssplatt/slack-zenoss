@@ -1,3 +1,5 @@
+# This project is not supported anymore. If you want to make changes, please fork and maintain your own fork.
+
 # Slack - Zenoss Integration WebHook Script
 A Slack notification using an incoming webhook to show events from Zenoss.
 
